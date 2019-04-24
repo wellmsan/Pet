@@ -57,7 +57,7 @@
 					        ${mensagem}
 					    </div>
 					</c:if>
-	                <form method="POST" action="/Pet/usuarios">
+	                <form method="POST" action="./controller?command=UsuarioUpdate">
 	                	<input type="hidden" class="form-control" name="id" value="${ usuario.id }" >
 	                    <jsp:include page="form.jsp" />
 	                    <div class="form-group row">

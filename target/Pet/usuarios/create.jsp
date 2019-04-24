@@ -57,7 +57,7 @@
 					        ${mensagem}
 					    </div>
 					</c:if>
-	                <form method="POST" action="/Pet/usuarios">
+	                <form method="POST" action="./controller?command=UsuarioSave">
 	                    <jsp:include page="form.jsp" />
 	                    <div class="form-group row">
                             <div class="col-sm-4 col-sm-offset-2">

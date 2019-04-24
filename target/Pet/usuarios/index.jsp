@@ -37,7 +37,7 @@
 	</div>
 	<div class="col-sm-4">
 		<div class="title-action">
-            <a href="usuarios/create.jsp" class="btn btn-primary">Cadastrar</a>
+            <a href="./controller?command=UsuarioCreate" class="btn btn-primary">Cadastrar</a>
         </div>
 	</div>
 </div>
@@ -76,8 +76,8 @@
 									<td>${ usuario.nome }</td>
 									<td>${ usuario.email }</td>
 									<td class="right">
-										<a href="/Pet/usuarios?acao=editar&id=${usuario.id}" class="btn btn-white btn-bitbucket"><i class="fa fa-pencil"></i></a>
-					                    <a href="/Pet/usuarios?acao=excluir&id=${usuario.id}" class="btn btn-white btn-bitbucket"><i class="fa fa-trash-o"></i></a>
+										<a href="./controller?command=UsuarioEdit&id=${usuario.id}" class="btn btn-white btn-bitbucket"><i class="fa fa-pencil"></i></a>
+					                    <a href="./controller?command=UsuarioRemove&id=${usuario.id}" class="btn btn-white btn-bitbucket"><i class="fa fa-trash-o"></i></a>
 									</td>
 								</tr>
 							</c:forEach>

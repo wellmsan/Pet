@@ -3,7 +3,7 @@
 				MBA Engenharia de Software <strong>Estácio</strong>.
 			</div>
 			<div>
-				<strong>Copyright</strong> Welber Santana &copy; 2019
+				Copyright &copy; 2019 <strong>Welber Santana</strong>
 			</div>
 		</div>
 

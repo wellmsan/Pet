@@ -36,14 +36,14 @@ public class UsuarioDAO extends DaoAbstract<Usuario> {
 	@Override
 	public List<Usuario> getAll() {
 		Session session = (Session) getEntityManager().getDelegate();
-		return session.createCriteria(Usuario.class).list();
+		return session.createCriteria(Usuario.class).addOrder(Order.asc("nome")).list();
 	}
 	
 	@Override
 	public List<Usuario> getAllBy(Usuario t) {
 		Session session = (Session) getEntityManager().getDelegate();
 		Example example = Example.create(t).enableLike().ignoreCase();		
-		return session.createCriteria(Usuario.class).add(example).list();
+		return session.createCriteria(Usuario.class).add(example).addOrder(Order.asc("nome")).list();
 	}
 
 }

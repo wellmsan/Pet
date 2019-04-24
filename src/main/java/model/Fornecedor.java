@@ -3,6 +3,8 @@ package model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
+import utils.ValidacaoException;
+
 @Entity(name="pessoa_juridica")
 public class Fornecedor extends Pessoa {
 	@Column(length=200, nullable=false)
@@ -58,6 +60,8 @@ public class Fornecedor extends Pessoa {
 		this.inscricaoMunicipal = inscricaoMunicipal;
 	}
 	
-	
+	public void valida() throws ValidacaoException {
+		
+	}
 
 }
