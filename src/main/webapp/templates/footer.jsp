@@ -1,9 +1,9 @@
 		<div class="footer">
 			<div class="float-right">
-				10GB of <strong>250GB</strong> Free.
+				MBA Engenharia de Software <strong>Estácio</strong>.
 			</div>
 			<div>
-				<strong>Copyright</strong> Example Company &copy; 2014-2018
+				Copyright &copy; 2019 <strong>Welber Santana</strong>
 			</div>
 		</div>
 

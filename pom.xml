@@ -7,7 +7,7 @@
 	<version>1.0</version>
 	<packaging>war</packaging>
 	<name>Pet</name>
-	<description>Projeto elaborado para avaliação da disciplina Projeto e Implementação Orientado a Objetos	</description>
+	<description>Projeto elaborado para avaliação da disciplina Projeto e Implementação Orientado a Objetos	do MBA em Engenharia de Software da Estácio</description>
 
 	<dependencies>
 		<!-- HIBERNATE -->

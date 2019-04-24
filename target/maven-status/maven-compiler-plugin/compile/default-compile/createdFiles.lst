@@ -8,3 +8,4 @@ utils\SessionUtil.class
 model\Pet.class
 model\Usuario.class
 utils\ValidacaoException.class
+utils\ServletBase.class
