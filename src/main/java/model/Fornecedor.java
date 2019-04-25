@@ -61,7 +61,13 @@ public class Fornecedor extends Pessoa {
 	}
 	
 	public void valida() throws ValidacaoException {
-		
+		if(razaoSocial == null || "".equals(razaoSocial.trim())) {
+			throw new ValidacaoException("Preencha o campo Razão Social!");
+		}
+		if(cnpj == null || "".equals(cnpj.trim())) {
+			throw new ValidacaoException("Preencha o campo CNPJ!");
+		}
+		super.valida();
 	}
 
 }

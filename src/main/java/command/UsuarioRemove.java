@@ -24,7 +24,7 @@ public class UsuarioRemove implements Command{
 			request.setAttribute("usuarios", usuarios);
 			request.setAttribute("mensagem", "Falha ao excluir Usuário! " + e.getMessage());
 			request.setAttribute("tipo", "danger");
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/usuarios/index.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("./controller?command=UsuarioIndex");
 			dispatcher.forward(request, response);
 		}
 	}

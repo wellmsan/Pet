@@ -57,7 +57,7 @@
 					        ${mensagem}
 					    </div>
 					</c:if>
-	                <form method="POST" action="./controller?command=FornecedorCreate">
+	                <form method="POST" action="./controller?command=FornecedorSave">
 	                    <jsp:include page="form.jsp" />
 	                    <div class="form-group row">
                             <div class="col-sm-4 col-sm-offset-2">
@@ -91,10 +91,9 @@
 <!-- Page-Level Scripts -->
 <script>
     $(document).ready(function() {
-
-        $('.footable').footable();
+        $('input[name=cnpj]').mask('000.000.000/0000-00');
+        $('input[name=telefone]').mask('00 00000.0000');
 
     });
 </script>
-
 </html>

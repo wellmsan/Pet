@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 
 import utils.ModelBase;
+import utils.ValidacaoException;
 
 @Entity(name="pessoa")
 public abstract class Pessoa extends ModelBase {
@@ -78,8 +79,20 @@ public abstract class Pessoa extends ModelBase {
 		this.estado = estado;
 	}
 	
-	
-	 
+	public void valida() throws ValidacaoException {
+		if(email == null || "".equals(email.trim())) {
+			throw new ValidacaoException("Preencha o campo E-mail!");
+		}
+		if(telefone == null || "".equals(telefone.trim())) {
+			throw new ValidacaoException("Preencha o campo Telefone!");
+		}
+		if(cidade == null || "".equals(cidade.trim())) {
+			throw new ValidacaoException("Preencha o campo Cidade!");
+		}
+		if(estado == null || "".equals(estado.trim())) {
+			throw new ValidacaoException("Preencha o campo Estado!");
+		}
+	}
 	
 	
 }

@@ -24,7 +24,7 @@ public class FornecedorRemove implements Command{
 			request.setAttribute("fornecedores", fornecedores);
 			request.setAttribute("mensagem", "Falha ao excluir Fornecedor! " + e.getMessage());
 			request.setAttribute("tipo", "danger");
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/fornecedores/index.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("./controller?command=FornecedorIndex");
 			dispatcher.forward(request, response);
 		}
 	}

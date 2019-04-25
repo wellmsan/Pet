@@ -24,13 +24,13 @@ public class UsuarioSave implements Command{
 			request.setAttribute("mensagem", "Usuario salvo com sucesso!!!");
 			request.setAttribute("tipo", "success");
 			request.setAttribute("usuarioes", UsuarioDAO.getInstance().getAll());
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/usuarios/index.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("./controller?command=UsuarioIndex");
 			dispatcher.forward(request, response);
 		} catch (Exception e) {
 			request.setAttribute("usuario", usuario);
 			request.setAttribute("mensagem", "Falha ao salvar Usuario! " + e.getMessage());
 			request.setAttribute("tipo", "danger");
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/usuarios/create.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("./controller?command=UsuarioCreate");
 			dispatcher.forward(request, response);
 		}
 	}

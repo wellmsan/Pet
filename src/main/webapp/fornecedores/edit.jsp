@@ -92,8 +92,8 @@
 <!-- Page-Level Scripts -->
 <script>
     $(document).ready(function() {
-
-        $('.footable').footable();
+        $('input[name=cnpj]').mask('000.000.000/0000-00');
+        $('input[name=telefone]').mask('00 00000.0000');
 
     });
 </script>
