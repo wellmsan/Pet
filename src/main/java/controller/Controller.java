@@ -8,7 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import command.Command;
+import utils.Command;
+import utils.SessionUtil;
 
 @WebServlet("/controller")
 public class Controller extends HttpServlet {
@@ -20,13 +21,15 @@ public class Controller extends HttpServlet {
 	public Controller() {}
 	
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Command command = null;
-		try {
-			command = (Command) Class.forName("command." + request.getParameter("command")).newInstance();
-		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
-			e.printStackTrace();
+		if(SessionUtil.usuarioLogado(request, response) != null) {
+			Command command = null;
+			try {
+				command = (Command) Class.forName("command." + request.getParameter("command")).newInstance();
+			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+			command.execute(request, response);
 		}
-		command.execute(request, response);
 	}
 	
 	/**

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.FornecedorDAO;
 import model.Fornecedor;
+import utils.Command;
 
 public class FornecedorIndex implements Command{
 

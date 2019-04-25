@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.UsuarioDAO;
 import model.Usuario;
+import utils.Command;
 
 public class UsuarioRemove implements Command{
 

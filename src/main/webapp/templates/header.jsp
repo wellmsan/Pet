@@ -3,19 +3,12 @@
 		<ul class="nav metismenu" id="side-menu">
 			<li class="nav-header">
 				<div class="dropdown profile-element">
-					<img alt="image" class="rounded-circle" src="img/profile_small.jpg" />
+					<img alt="image" class="rounded-circle" src="${baseURL}/assets/inspinia/img/profile_small.jpg" />
 					<a data-toggle="dropdown" class="dropdown-toggle" href="#"> <span
-						class="block m-t-xs font-bold">David Williams</span> <span
-						class="text-muted text-xs block">Art Director <b
+						class="block m-t-xs font-bold">${ sessionScope.usuarioLogado.nome }</span> <span
+						class="text-muted text-xs block">${ sessionScope.usuarioLogado.email }<b
 							class="caret"></b></span>
 					</a>
-					<ul class="dropdown-menu animated fadeInRight m-t-xs">
-						<li><a class="dropdown-item" href="profile.html">Profile</a></li>
-						<li><a class="dropdown-item" href="contacts.html">Contacts</a></li>
-						<li><a class="dropdown-item" href="mailbox.html">Mailbox</a></li>
-						<li class="dropdown-divider"></li>
-						<li><a class="dropdown-item" href="login.html">Logout</a></li>
-					</ul>
 				</div>
 				<div class="logo-element">Pet+</div>
 			</li>
@@ -48,7 +41,7 @@
 				</form>
 			</div>
 			<ul class="nav navbar-top-links navbar-right">
-				<li><a href="login.html"> <i class="fa fa-sign-out"></i>
+				<li><a href="./controller?command=Logout"> <i class="fa fa-sign-out"></i>
 						Sair
 				</a></li>
 			</ul>

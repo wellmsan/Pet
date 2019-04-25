@@ -33,20 +33,27 @@
             <h3>Bem vindo ao Pet+</h3>
             <p></p>
             <p>Login in</p>
-            <form class="m-t" role="form" action="index.html">
+            <c:if test="${mensagem != '' && mensagem != null}">
+				<div class="alert alert-${tipo} alert-dismissable">
+			        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+			        ${mensagem}
+			    </div>
+			</c:if>
+            <form class="m-t" role="form" method="POST" action="./loginController?command=LoginEntrar">
                 <div class="form-group">
-                    <input type="email" class="form-control" placeholder="Username" required="">
+                    <input type="email" class="form-control" placeholder="Email" name="email" required="">
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control" placeholder="Password" required="">
+                    <input type="password" class="form-control" placeholder="Senha" name="senha" required="">
                 </div>
                 <button type="submit" class="btn btn-primary block full-width m-b">Entrar</button>
 
                 <!--  a href="#"><small>Forgot password?</small></a -->
                 <p class="text-muted text-center"><small>Ainda não tem uma conta?</small></p>
-                <a class="btn btn-sm btn-white btn-block" href="register.html">Criar Conta</a>
+                <a class="btn btn-sm btn-white btn-block" href="./loginController?command=CriarConta">Criar Conta</a>
             </form>
-            <p class="m-t"> <small>&copy; 2019</small> </p>
+            <p class="m-t"> <small>Copyright &copy; 2019 <strong>Welber Santana</strong></small> </p>
+            <p>MBA Engenharia de Software <strong>Estácio</strong>.</p>
         </div>
     </div>
 
