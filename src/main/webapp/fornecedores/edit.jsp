@@ -58,7 +58,7 @@
 					    </div>
 					</c:if>
 	                <form method="POST" action="./controller?command=FornecedorUpdate">
-	                	<input type="hidden" class="form-control" name="id" value="${ usuario.id }" >
+	                	<input type="hidden" class="form-control" name="id" value="${ fornecedor.id }" >
 	                    <jsp:include page="form.jsp" />
 	                    <div class="form-group row">
                             <div class="col-sm-4 col-sm-offset-2">

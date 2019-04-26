@@ -2,6 +2,8 @@ package model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import utils.ModelBase;
 import utils.ValidacaoException;
@@ -20,8 +22,11 @@ public abstract class Pessoa extends ModelBase {
 	private String numeroEndereco;
 	@Column(length=25, nullable=false)
 	private String cidade;
-	@Column(length=2, nullable=false)
-	private String estado;
+//	@Column(length=2, nullable=false)
+//	private String estado;
+	@ManyToOne
+	@JoinColumn(name = "estado_id")
+	private Estado estado;
 	
 	public String getTelefone() {
 		return telefone;
@@ -71,11 +76,11 @@ public abstract class Pessoa extends ModelBase {
 		this.cidade = cidade;
 	}
 	
-	public String getEstado() {
+	public Estado getEstado() {
 		return estado;
 	}
 	
-	public void setEstado(String estado) {
+	public void setEstado(Estado estado) {
 		this.estado = estado;
 	}
 	
@@ -89,7 +94,7 @@ public abstract class Pessoa extends ModelBase {
 		if(cidade == null || "".equals(cidade.trim())) {
 			throw new ValidacaoException("Preencha o campo Cidade!");
 		}
-		if(estado == null || "".equals(estado.trim())) {
+		if(estado == null) {
 			throw new ValidacaoException("Preencha o campo Estado!");
 		}
 	}

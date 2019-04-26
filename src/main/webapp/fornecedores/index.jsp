@@ -1,7 +1,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <c:set var="req" value="${pageContext.request}" />
-<c:set var="baseURL"value="${req.scheme}://${req.serverName}:${req.serverPort}${req.contextPath}" />
+<c:set var="baseURL" value="${req.scheme}://${req.serverName}:${req.serverPort}${req.contextPath}" />
 
 <!DOCTYPE html>
 <html>
@@ -79,7 +79,7 @@
 									<td>${ fornecedor.nomeFantasia }</td>
 									<td>${ fornecedor.cnpj }</td>
 									<td>${ fornecedor.cidade }</td>
-									<td>${ fornecedor.estado }</td>
+									<td>${ fornecedor.estado.uf }</td>
 									<td class="right">
 										<a href="./controller?command=FornecedorEdit&id=${fornecedor.id}" class="btn btn-white btn-bitbucket"><i class="fa fa-pencil"></i></a>
 					                    <a href="./controller?command=FornecedorRemove&id=${fornecedor.id}" class="btn btn-white btn-bitbucket"><i class="fa fa-trash-o"></i></a>

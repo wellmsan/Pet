@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.EstadoDAO;
 import dao.FornecedorDAO;
 import model.Fornecedor;
 import utils.Command;
@@ -27,7 +28,7 @@ public class FornecedorSave implements Command{
 		fornecedor.setComplementoEndereco(request.getParameter("complementoEndereco"));
 		fornecedor.setNumeroEndereco(request.getParameter("numeroEndereco"));
 		fornecedor.setCidade(request.getParameter("cidade"));
-		fornecedor.setEstado(request.getParameter("estado"));
+		fornecedor.setEstado(EstadoDAO.getInstance().getById(Long.parseLong(request.getParameter("estado"))));
 		try {
 			fornecedor.valida();
 			FornecedorDAO.getInstance().save(fornecedor);

@@ -7,6 +7,7 @@
 		<class>model.Fornecedor</class>
 		<class>model.Pet</class>
 		<class>model.Usuario</class>
+		<class>model.Estado</class>
 		
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:derby:memory:pet;create=true" />
