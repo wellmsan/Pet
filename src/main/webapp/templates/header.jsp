@@ -1,26 +1,8 @@
 <nav class="navbar-default navbar-static-side" role="navigation">
 	<div class="sidebar-collapse">
 		<ul class="nav metismenu" id="side-menu">
-			<li class="nav-header">
-				<div class="dropdown profile-element">
-					<img alt="image" class="rounded-circle" src="${baseURL}/assets/inspinia/img/profile_small.jpg" />
-					<a data-toggle="dropdown" class="dropdown-toggle" href="#"> <span
-						class="block m-t-xs font-bold">${ sessionScope.usuarioLogado.nome }</span> <span
-						class="text-muted text-xs block">${ sessionScope.usuarioLogado.email }<b
-							class="caret"></b></span>
-					</a>
-				</div>
-				<div class="logo-element">Pet+</div>
-			</li>
-			<li>
-				<a href="index.html"><i class="fa fa-paw"></i> <span class="nav-label">Pets</span></a>
-			</li>
-			<li>
-				<a href="./controller?command=FornecedorIndex"><i class="fa fa-truck"></i> <span class="nav-label">Fornecedores</span></a>
-			</li>
-			<li>
-				<a href="./controller?command=UsuarioIndex"><i class="fa fa-users"></i> <span class="nav-label">Usuários</span></a> 
-			</li>
+			<jsp:include page="/templates/profile.jsp" />
+			<jsp:include page="/templates/menu.jsp" />
 		</ul>
 
 	</div>

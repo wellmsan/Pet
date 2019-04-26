@@ -10,7 +10,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Pet | Usuários</title>
+<title>Pet | Estados</title>
 
 <link href="${baseURL}/assets/inspinia/css/bootstrap.min.css" rel="stylesheet">
 <link href="${baseURL}/assets/inspinia/font-awesome/css/font-awesome.css" rel="stylesheet">
@@ -28,16 +28,16 @@
 <jsp:include page="/templates/header.jsp" />
 <div class="row wrapper border-bottom white-bg page-heading">
 	<div class="col-sm-8">
-		<h2>Usuários</h2>
+		<h2>Estados</h2>
 		<ol class="breadcrumb">
 			<li class="breadcrumb-item"><a href="index.html">Home</a></li>
-			<li class="breadcrumb-item"><a>Usuários</a></li>
+			<li class="breadcrumb-item"><a>Estados</a></li>
 			<li class="breadcrumb-item active"><strong>Lista</strong></li>
 		</ol>
 	</div>
 	<div class="col-sm-4">
 		<div class="title-action">
-            <a href="./controller?command=UsuarioCreate" class="btn btn-primary">Cadastrar</a>
+            <a href="./controller?command=EstadoCreate" class="btn btn-primary">Cadastrar</a>
         </div>
 	</div>
 </div>
@@ -46,7 +46,7 @@
 		<div class="col-lg-12">
 			<div class="ibox ">
 				<div class="ibox-title">
-					<h5>Lista de Usuários</h5>
+					<h5>Lista de Estados</h5>
 
 					<div class="ibox-tools">
 					</div>
@@ -66,18 +66,20 @@
 						<thead>
 							<tr>
 								<th>Nome</th>
-								<th>E-mail</th>
+								<th>UF</th>
+								<th>País</th>
 								<th width="20%;"></th>
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach var="usuario" items="${ usuarios }">
+							<c:forEach var="estado" items="${ estados }">
 								<tr>
-									<td>${ usuario.nome }</td>
-									<td>${ usuario.email }</td>
+									<td>${ estado.nome }</td>
+									<td>${ estado.uf }</td>
+									<td>${ estado.pais }</td>
 									<td class="right">
-										<a href="./controller?command=UsuarioEdit&id=${usuario.id}" class="btn btn-white btn-bitbucket"><i class="fa fa-pencil"></i></a>
-					                    <a href="./controller?command=UsuarioRemove&id=${usuario.id}" class="btn btn-white btn-bitbucket"><i class="fa fa-trash-o"></i></a>
+										<a href="./controller?command=EstadoEdit&id=${estado.id}" class="btn btn-white btn-bitbucket"><i class="fa fa-pencil"></i></a>
+					                    <a href="./controller?command=EstadoRemove&id=${estado.id}" class="btn btn-white btn-bitbucket"><i class="fa fa-trash-o"></i></a>
 									</td>
 								</tr>
 							</c:forEach>
@@ -115,9 +117,7 @@
 <!-- Page-Level Scripts -->
 <script>
     $(document).ready(function() {
-
         $('.footable').footable();
-
     });
 </script>
 

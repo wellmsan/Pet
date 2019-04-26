@@ -69,7 +69,7 @@
 								<th>CNPJ</th>
 								<th>Cidade</th>
 								<th>UF</th>
-								<th width="10%;"></th>
+								<th width="20%;"></th>
 							</tr>
 						</thead>
 						<tbody>

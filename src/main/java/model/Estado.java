@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 
 import utils.ModelBase;
+import utils.ValidacaoException;
 
 @Entity(name="estado")
 public class Estado extends ModelBase{
@@ -22,8 +23,6 @@ public class Estado extends ModelBase{
 		this.uf = uf;
 		this.pais = pais;
 	}
-
-
 
 	public String getNome() {
 		return nome;
@@ -47,6 +46,18 @@ public class Estado extends ModelBase{
 
 	public void setPais(String pais) {
 		this.pais = pais;
+	}
+	
+	public void valida() throws ValidacaoException {
+		if(nome == null || "".equals(nome.trim())) {
+			throw new ValidacaoException("Preencha o campo Nome!");
+		}
+		if(uf == null || "".equals(uf.trim())) {
+			throw new ValidacaoException("Preencha o campo UF");
+		}
+		if(pais == null || "".equals(pais.trim())) {
+			throw new ValidacaoException("Preencha o campo País");
+		}
 	}
 	
 	

@@ -10,7 +10,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Pet | Usuários</title>
+<title>Pet | Estados</title>
 
 <link href="${baseURL}/assets/inspinia/css/bootstrap.min.css" rel="stylesheet">
 <link href="${baseURL}/assets/inspinia/font-awesome/css/font-awesome.css" rel="stylesheet">
@@ -28,71 +28,47 @@
 <jsp:include page="/templates/header.jsp" />
 <div class="row wrapper border-bottom white-bg page-heading">
 	<div class="col-sm-8">
-		<h2>Usuários</h2>
+		<h2>Estados</h2>
 		<ol class="breadcrumb">
 			<li class="breadcrumb-item"><a href="index.html">Home</a></li>
-			<li class="breadcrumb-item"><a>Usuários</a></li>
-			<li class="breadcrumb-item active"><strong>Lista</strong></li>
+			<li class="breadcrumb-item"><a>Estados</a></li>
+			<li class="breadcrumb-item active"><strong>Editar</strong></li>
 		</ol>
 	</div>
 	<div class="col-sm-4">
 		<div class="title-action">
-            <a href="./controller?command=UsuarioCreate" class="btn btn-primary">Cadastrar</a>
+            <!-- a href="" class="btn btn-primary">Adicionar</a -->
         </div>
 	</div>
 </div>
 <div class="wrapper wrapper-content animated fadeInRight">
 	<div class="row">
-		<div class="col-lg-12">
-			<div class="ibox ">
-				<div class="ibox-title">
-					<h5>Lista de Usuários</h5>
-
-					<div class="ibox-tools">
-					</div>
-				</div>
-				<div class="ibox-content">
-					<c:if test="${mensagem != '' && mensagem != null}">
+	    <div class="col-lg-12">
+	        <div class="ibox ">
+	            <div class="ibox-title">
+	                <h5>Cadastrar Estado</h5>
+	                <div class="ibox-tools">
+	                </div>
+	            </div>
+	            <div class="ibox-content">
+	            	<c:if test="${mensagem != '' && mensagem != null}">
 						<div class="alert alert-${tipo} alert-dismissable">
 					        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
 					        ${mensagem}
 					    </div>
 					</c:if>
-					<input type="text" class="form-control form-control-sm m-b-xs"
-						id="filter" placeholder="Localizar...">
-
-					<table class="footable table table-stripped" data-page-size="8"
-						data-filter=#filter>
-						<thead>
-							<tr>
-								<th>Nome</th>
-								<th>E-mail</th>
-								<th width="20%;"></th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach var="usuario" items="${ usuarios }">
-								<tr>
-									<td>${ usuario.nome }</td>
-									<td>${ usuario.email }</td>
-									<td class="right">
-										<a href="./controller?command=UsuarioEdit&id=${usuario.id}" class="btn btn-white btn-bitbucket"><i class="fa fa-pencil"></i></a>
-					                    <a href="./controller?command=UsuarioRemove&id=${usuario.id}" class="btn btn-white btn-bitbucket"><i class="fa fa-trash-o"></i></a>
-									</td>
-								</tr>
-							</c:forEach>
-						</tbody>
-						<tfoot>
-							<tr>
-								<td colspan="5">
-									<ul class="pagination float-right"></ul>
-								</td>
-							</tr>
-						</tfoot>
-					</table>
-				</div>
-			</div>
-		</div>
+	                <form method="POST" action="./controller?command=EstadoSave">
+	                    <jsp:include page="form.jsp" />
+	                    <div class="form-group row">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <button class="btn btn-white btn-sm" type="reset">Cancelar</button>
+                                <button class="btn btn-primary btn-sm" type="submit">Salvar</button>
+                            </div>
+                        </div>
+	                </form>
+	            </div>
+	        </div>
+	    </div>
 	</div>
 </div>
 
@@ -115,8 +91,6 @@
 <!-- Page-Level Scripts -->
 <script>
     $(document).ready(function() {
-
-        $('.footable').footable();
 
     });
 </script>
