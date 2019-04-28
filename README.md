@@ -53,8 +53,115 @@ Foi utilizada uma associação unidirecional(simples) definindo o valor único d
 O banco de dados desse projeto é criado de forma automática pelo hibernate de acordo as annotation utilizadas nas classes Bean. 
 
 ## Criação das classes Beans
-## Criação da camada de persistência do modelo MVC II
 
+Tracho da classe Estado.java:
+
+	@Entity(name="estado")
+	public class Estado extends ModelBase{
+		@Column(length=80, nullable=false)
+		private String nome;
+		@Column(length=2, nullable=false)
+		private String uf;
+		@Column(length=2, nullable=false)
+		private String pais;
+		
+		public Estado() {}
+
+		public Estado(String nome, String uf, String pais) {
+			super();
+			this.nome = nome;
+			this.uf = uf;
+			this.pais = pais;
+		}
+		
+		//Métodos Gets e Sets
+		...
+	}
+	
+Trecho da classe Fornecedor.java:
+	
+	@Entity(name="pessoa_juridica")
+	public class Fornecedor extends Pessoa {
+		@Column(length=200, nullable=false)
+		private String razaoSocial;
+		@Column(length=100, nullable=true)
+		private String nomeFantasia;
+		@Column(length=19, nullable=false) 
+		private String cnpj;
+		@Column(length=30, nullable=true)
+		private String inscricaoEstadual;
+		@Column(length=30, nullable=true)
+		private String inscricaoMunicipal;
+
+		public Fornecedor() {}
+		
+		//Métodos Gets e Sets
+		...	
+	}
+	
+Trecho da classe Pessoa.java:
+
+	@Entity(name="pessoa")
+	public abstract class Pessoa extends ModelBase {
+		@Column(length=14, nullable=false)
+		private String telefone;
+		@Column(length=255, nullable=false)
+		private String email;
+		@Column(length=60, nullable=false)
+		private String endereco;
+		@Column(length=60, nullable=true)
+		private String complementoEndereco;
+		@Column(length=10, nullable=false)
+		private String numeroEndereco;
+		@Column(length=25, nullable=false)
+		private String cidade;
+		@ManyToOne
+		@JoinColumn(name = "estado_id")
+		private Estado estado;
+
+		//Métodos Gets e Sets
+		...
+
+	}
+
+Trecho da classe Usuario.java:
+	
+	@Entity(name="usuario")
+	public class Usuario extends ModelBase {
+		@Column(length=50, nullable=false)
+		private String nome;
+		@Column(length=255, nullable=false)
+		private String email;
+		@Column(length=50, nullable=false)
+		private String senha;
+
+		public Usuario() {}
+		
+		//Métodos Gets e Sets
+		...	
+
+	}
+	
+Trecho da classe Pet.java:
+	
+	@Entity(name="pets")
+	public abstract class Pet extends ModelBase {
+		@Column(length=50, nullable=false)
+		private String nome;
+		@Column(length=20, nullable=true)
+		private Date nascimento;
+		@ManyToOne
+		@JoinColumn(name="usuario_id")
+		private Usuario tutor;
+		
+		public Pet(){}
+
+		//Métodos Gets e Sets
+		...
+
+	}
+
+## Criação da camada de persistência do modelo MVC II
 Foram criadas classes DAO para cada entidade envolvida. Exemplo a classe UsuarioDAO.java extendendo a classe abstrata DaoAbstract.java utilizando Generics e padrão de projeto Singleton:
 
 	public class UsuarioDAO extends DaoAbstract<Usuario> {
