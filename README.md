@@ -169,7 +169,188 @@ Foram criadas classes DAO para cada entidade envolvida. Exemplo a classe Usuario
 	}
 
 ## É facultado o uso de JPA/Hibernate
+No projeto foi utilizando o JPA e Hibernate. Trecho da classe Fornecedor.java utilizando annotations do JPA.
+
+	@Entity(name="pessoa_juridica")
+	public class Fornecedor extends Pessoa {
+		@Column(length=200, nullable=false)
+		private String razaoSocial;
+		@Column(length=100, nullable=true)
+		private String nomeFantasia;
+		@Column(length=19, nullable=false) 
+		private String cnpj;
+		@Column(length=30, nullable=true)
+		private String inscricaoEstadual;
+		@Column(length=30, nullable=true)
+		private String inscricaoMunicipal;
+	}
+
+Trecho do arquivo de configuração do JPA persistence.xml
+
+	<persistence-unit name="PetPU" transaction-type="RESOURCE_LOCAL">
+		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+		
+		<class>model.Pessoa</class>
+		<class>model.Fornecedor</class>
+		<class>model.Pet</class>
+		<class>model.Usuario</class>
+		<class>model.Estado</class>
+		
+		<properties>
+			<property name="javax.persistence.jdbc.url" value="jdbc:derby:memory:pet;create=true" />
+			<property name="javax.persistence.jdbc.user" value="pet" />
+			<property name="javax.persistence.jdbc.password" value="pet" />
+			<property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver" />
+			
+			<property name="hibernate.dialect" value="org.hibernate.dialect.DerbyTenSevenDialect" />
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.format_sql" value="true" />
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+		</properties>
+	</persistence-unit>
+	
+Trecho das classes DAO que utilizam o Query By Example do hibernate para consultas sql sem necessidade de escrita destas.
+
+	@Override
+	public List<Usuario> getAllBy(Usuario t) {
+		Session session = (Session) getEntityManager().getDelegate();
+		Example example = Example.create(t).enableLike().ignoreCase();		
+		return session.createCriteria(Usuario.class).add(example).addOrder(Order.asc("nome")).list();
+	}
+	
 ## Implemente os códigos para gerenciamento de sessão do sistema
+
+Para o controle de sessão foi implementada a classe SessionUtil.java que contem métodos estáticos para controle.
+
+	public class SessionUtil {
+		public static Usuario usuarioLogado(HttpServletRequest request, HttpServletResponse response) {
+			HttpSession session = request.getSession();
+			Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+			if (usuario == null) {
+				try {
+					response.sendRedirect("/Pet/index.jsp");
+				} catch (IOException e) {
+					e.printStackTrace();
+				}		
+			}
+			return usuario; 
+		}
+		
+		public static void addUsuarioSession(HttpServletRequest request, HttpServletResponse response, Usuario usuario) {
+			HttpSession session = request.getSession(true);
+			session.setAttribute("usuarioLogado", usuario);
+		}
+
+		public static void logout(HttpServletRequest request, HttpServletResponse response) {
+			HttpSession session = request.getSession(false);
+			session.invalidate();
+			usuarioLogado(request, response);
+		}
+	}
+
 ## Implemente os códigos para gerenciamento de login ao sistema
+O controle de login foi construíndo utilizando implementações de Command. Classe LoginEntrar.java
+
+	public class LoginEntrar implements Command{
+
+		@Override
+		public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+			Usuario usuario = new Usuario();
+			usuario.setEmail(request.getParameter("email"));
+			usuario.setSenha(request.getParameter("senha"));
+
+			List<Usuario> usu = UsuarioDAO.getInstance().getAllBy(usuario);
+
+			if(usu.isEmpty()) {
+				usuario.setSenha("");
+				request.setAttribute("usuario", usuario);
+				request.setAttribute("mensagem", "Usuário e/ou senha inválidos! Tente novamente!");
+				request.setAttribute("tipo", "danger");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("./loginController?command=Login");
+				dispatcher.forward(request, response);
+			} else {
+				SessionUtil.addUsuarioSession(request, response, usu.get(0));
+				RequestDispatcher dispatcher = request.getRequestDispatcher("./controller?command=FornecedorIndex");
+				dispatcher.forward(request, response);
+			}		
+		}
+
+	}
+
 ## Criação do Servlet para a administração e para a para a exibição na Web (Front Controller) em conjunto com o padrão Command
+Foram criados dois Sevlets para controle das atividades do sistema. O Controller.java para controle das atividades administrativas do sistema e LoginControle.java para controle do login.
+
+Servlet Controller.java
+
+	@WebServlet("/controller")
+	public class Controller extends HttpServlet {
+		private static final long serialVersionUID = 1L;
+
+		public Controller() {}
+
+		protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+			if(SessionUtil.usuarioLogado(request, response) != null) {
+				Command command = null;
+				try {
+					command = (Command) Class.forName("command." + request.getParameter("command")).newInstance();
+				} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+					e.printStackTrace();
+				}
+				command.execute(request, response);
+			}
+		}
+
+		/**
+		 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+		 *      response)
+		 */
+		protected void doGet(HttpServletRequest request, HttpServletResponse response)
+				throws ServletException, IOException {
+			processRequest(request, response);
+		}
+
+		protected void doPost(HttpServletRequest request, HttpServletResponse response)
+				throws ServletException, IOException {
+			processRequest(request, response);
+		}
+
+	}
+
+Servlet LoginController.java
+
+	@WebServlet("/loginController")
+	public class LoginController extends HttpServlet {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		public LoginController() {}
+
+		protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+			Command command = null;
+			try {
+				command = (Command) Class.forName("command." + request.getParameter("command")).newInstance();
+			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+			command.execute(request, response);
+		}
+
+		/**
+		 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+		 *      response)
+		 */
+		protected void doGet(HttpServletRequest request, HttpServletResponse response)
+				throws ServletException, IOException {
+			processRequest(request, response);
+		}
+
+		protected void doPost(HttpServletRequest request, HttpServletResponse response)
+				throws ServletException, IOException {
+			processRequest(request, response);
+		}
+
+	}
+
 ## Criação dos JSPs necessários para a camada de visualização do Site e da administração.
