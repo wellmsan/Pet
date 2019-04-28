@@ -5,7 +5,7 @@ Projeto elaborado para avaliação da disciplina Projeto e Implementação Orien
 O aluno deverá ser capaz de desenvolver um sistema que realize as operações CRUD e controle sessão de usuário para Web seguindo os padrões MVC II, Front Controller e Command.
 
 ## Definição do domínio do negócio
-## Modelo deverá possuir no mínimo
+## Modelo deverá possuir no mínimo:
 ### Uma herança de 3 níveis
 A herança de 3 níveis foi aplicada na classe Fornecedor, que extende Pessoa e por sua vez extende ModelBase.
 Trecho da classe ModelBase.java:
@@ -30,6 +30,25 @@ Trecho da classe Fornecedor.java que extende Pessoa.java:
 
 	}
 ### Uma associação
+Foi utilizada uma associação unidirecional(simples) definindo o valor único da multiciplidade de muitos-pra-um representado pela annotation @ManyToOne seguedo pela annotation @JoinColum que especifica qual coluna deve ser utilizada na associação com a entidade.
+
+	@Entity(name="pessoa")
+	public abstract class Pessoa extends ModelBase {
+		...
+		@ManyToOne
+		@JoinColumn(name = "estado_id")
+		private Estado estado;
+
+		public Estado getEstado() {
+			return estado;
+		}
+
+		public void setEstado(Estado estado) {
+			this.estado = estado;
+		}
+
+	}
+	
 ## Criação do Banco de Dados
 ## Criação das classes Beans
 ## Criação da camada de persistência do modelo MVC II
