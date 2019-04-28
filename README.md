@@ -713,7 +713,7 @@ Para executar o projeto, importe-o no eclipse e crie uma nova configuração de 
 ## Screenshots
 
 <p align="center">
-  <img width="460" height="300" src="https://photos.google.com/photo/AF1QipPCBKsU3XhW9c9y10kbdKsKcInEBB7suZ3s7seU">
+  <img width="460" height="300" src="https://photos.app.goo.gl/7ybeU5wtnbtCM1B36">
 </p>
 
 ## Autor
