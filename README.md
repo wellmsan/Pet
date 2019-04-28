@@ -712,8 +712,9 @@ Para executar o projeto, importe-o no eclipse e crie uma nova configuração de 
 	
 ## Screenshots
 
-<img src="https://drive.google.com/open?id=1HlVwnCYD5QFoePem7kuxuBfaeSYhQaVT" />
-![Bilby Stampede]()
+<p align="center">
+  <img width="460" height="300" src="http://www.fillmurray.com/460/300">
+</p>
 
 ## Autor
 
