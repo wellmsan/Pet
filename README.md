@@ -5,6 +5,8 @@ Projeto elaborado para avaliação da disciplina Projeto e Implementação Orien
 O aluno deverá ser capaz de desenvolver um sistema que realize as operações CRUD e controle sessão de usuário para Web seguindo os padrões MVC II, Front Controller e Command.
 
 ## Definição do domínio do negócio
+Software Web para cadastro de fornecedores de clientes Pet Shop e Clínicas Veterinárias.
+
 ## Modelo deverá possuir no mínimo:
 ### Uma herança de 3 níveis
 A herança de 3 níveis foi aplicada na classe Fornecedor, que extende Pessoa e por sua vez extende ModelBase.
