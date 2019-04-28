@@ -712,7 +712,9 @@ Para executar o projeto, importe-o no eclipse e crie uma nova configuração de 
 	
 ## Screenshots
 
-[Clique aqui para acessar os Screenshots do Pet Fornecedor](https://drive.google.com/drive/folders/1186USy6G5P_3HHtbnIHPaYmXJfUuhVPb?usp=sharing)
+<p align="center">
+  <img src="http://www.well.eti.br/site/wp-content/uploads/2019/04/screencapture-login.png" />
+</p>
 
 ## Autor
 
