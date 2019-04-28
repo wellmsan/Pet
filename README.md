@@ -712,7 +712,8 @@ Para executar o projeto, importe-o no eclipse e crie uma nova configuração de 
 	
 ## Screenshots
 
-![Bilby Stampede](https://drive.google.com/open?id=1HlVwnCYD5QFoePem7kuxuBfaeSYhQaVT)
+<img src="https://drive.google.com/open?id=1HlVwnCYD5QFoePem7kuxuBfaeSYhQaVT" data-canonical-src="https://drive.google.com/open?id=1HlVwnCYD5QFoePem7kuxuBfaeSYhQaVT" width="200" height="400" />
+![Bilby Stampede]()
 
 ## Autor
 
