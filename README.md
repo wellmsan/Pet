@@ -715,6 +715,34 @@ Para executar o projeto, importe-o no eclipse e crie uma nova configuração de 
 <p align="center">
   <img src="http://www.well.eti.br/site/wp-content/uploads/2019/04/screencapture-login.png" />
 </p>
+<p align="center">
+  Tela de Login
+</p>
+
+<p align="center">
+  <img src="http://www.well.eti.br/site/wp-content/uploads/2019/04/screencapture-registrar.png" />
+</p>
+<p align="center">
+  Tela Cadastro no Sistema
+</p>
+
+<p align="center">
+  <img src="http://www.well.eti.br/site/wp-content/uploads/2019/04/screencapture-usuario.png" />
+</p>
+
+<p align="center">
+  <img src="http://www.well.eti.br/site/wp-content/uploads/2019/04/screencapture-estado.png" />
+</p>
+<p align="center">
+  Tela Lista de Estados
+</p>
+
+<p align="center">
+  <img src="http://www.well.eti.br/site/wp-content/uploads/2019/04/screencapture-cadastro-fornecedor.png" />
+</p>
+<p align="center">
+  Tela Formulário de Cadastro de Fornecedores
+</p>
 
 ## Autor
 
