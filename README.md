@@ -8,22 +8,22 @@ O aluno deverá ser capaz de desenvolver um sistema que realize as operações C
 ## Modelo deverá possuir no mínimo
 ### Uma herança de 3 níveis
 
-@MappedSuperclass
-public abstract class ModelBase {
+	@MappedSuperclass
+	public abstract class ModelBase {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
-	
-	public Long getId() {
-		return id;
+		@Id
+		@GeneratedValue(strategy = GenerationType.AUTO)
+		private Long id;
+
+		public Long getId() {
+			return id;
+		}
+
+		public void setId(Long id) {
+			this.id = id;
+		}
+
 	}
-	
-	public void setId(Long id) {
-		this.id = id;
-	}
-	
-}
 
 ### Uma associação
 ## Criação do Banco de Dados
