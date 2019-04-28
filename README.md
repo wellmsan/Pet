@@ -712,9 +712,7 @@ Para executar o projeto, importe-o no eclipse e crie uma nova configuração de 
 	
 ## Screenshots
 
-<p align="center">
-  <img width="460" height="300" src="https://photos.app.goo.gl/7ybeU5wtnbtCM1B36">
-</p>
+[Clique aqui para acessar os Screenshots do Pet Fornecedor](https://drive.google.com/drive/folders/1186USy6G5P_3HHtbnIHPaYmXJfUuhVPb?usp=sharing)
 
 ## Autor
 
