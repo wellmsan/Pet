@@ -50,8 +50,38 @@ Foi utilizada uma associação unidirecional(simples) definindo o valor único d
 	}
 	
 ## Criação do Banco de Dados
-O banco de dados desse projeto é criado de forma automática pelo hibernate de acordo as annotation utilizadas nas classes Bean. 
+O banco de dados desse projeto é criado de forma automática pelo hibernate de acordo as annotation utilizadas nas classes Bean. Com o intuito de facilitar a execução e avaliação do projeto foi utilizado o banco de dados Derby em memória. Com já dito anteriormente, ao executar o projeto o banco é construído automaticamente.
 
+Trecho do arquivo pom.xml que representa as dependências do projeto para o banco de dados Derby
+	<!-- https://mvnrepository.com/artifact/org.apache.derby/derby -->
+	<dependency>
+		<groupId>org.apache.derby</groupId>
+		<artifactId>derby</artifactId>
+		<version>10.12.1.1</version>
+	</dependency>
+
+	<!-- https://mvnrepository.com/artifact/org.apache.derby/derbyclient -->
+	<dependency>
+		<groupId>org.apache.derby</groupId>
+		<artifactId>derbyclient</artifactId>
+		<version>10.12.1.1</version>
+	</dependency>	
+
+Trecho do arquivo persistence.xml que realiza a configuração do banco de dados Derby.
+
+	<properties>
+		<property name="javax.persistence.jdbc.url" value="jdbc:derby:memory:pet;create=true" />
+		<property name="javax.persistence.jdbc.user" value="pet" />
+		<property name="javax.persistence.jdbc.password" value="pet" />
+		<property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver" />
+
+		<property name="hibernate.dialect" value="org.hibernate.dialect.DerbyTenSevenDialect" />
+		<property name="hibernate.show_sql" value="true" />
+		<property name="hibernate.format_sql" value="true" />
+		<property name="hibernate.hbm2ddl.auto" value="update" />
+	</properties>
+	
+	
 ## Criação das classes Beans
 
 Tracho da classe Estado.java:
@@ -667,3 +697,17 @@ Arquivo index.jsp que representa a tela de Login do sistema:
 	</body>
 
 	</html>
+	
+## Como executar
+Este projeto foi construído utilizando maven ao construir todas as depedências serão "baixadas". O projeto conta com a versão ambarcada do Tomcat7, não há necessidade de configurar outro servidor.
+
+	mvn clean install tomcat7:run-war
+	
+Para executar o projeto, importe-o no eclipse e crie uma nova configuração de execução (Botão direto no projeto >>  Run As >> Maven Build...), em Goals cole o trecho abaixo:
+	
+	clean install tomcat7:run-war
+		
+	
+## Autor
+
+- Welber Santana [a link](https://github.com/wellmsan)
