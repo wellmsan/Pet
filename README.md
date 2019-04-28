@@ -50,8 +50,131 @@ Foi utilizada uma associação unidirecional(simples) definindo o valor único d
 	}
 	
 ## Criação do Banco de Dados
+O banco de dados desse projeto é criado de forma automática pelo hibernate de acordo as annotation utilizadas nas classes Bean. 
+
 ## Criação das classes Beans
 ## Criação da camada de persistência do modelo MVC II
+
+Foram criadas classes DAO para cada entidade envolvida. Exemplo a classe UsuarioDAO.java extendendo a classe abstrata DaoAbstract.java utilizando Generics e padrão de projeto Singleton:
+
+	public class UsuarioDAO extends DaoAbstract<Usuario> {
+
+		private static UsuarioDAO instance;
+
+		private UsuarioDAO() {}
+
+		public static synchronized UsuarioDAO getInstance () {
+			if(instance == null)
+				instance = new UsuarioDAO();
+			return instance;
+		}
+
+		@Override
+		protected EntityManager getEntityManager() {
+			EntityManagerFactory factory = Persistence.createEntityManagerFactory("PetPU");
+			if (entityManager == null) {
+				entityManager = factory.createEntityManager();
+				setClazz(Usuario.class);
+			}
+			return entityManager;
+		}
+
+		@Override
+		public List<Usuario> getAll() {
+			Session session = (Session) getEntityManager().getDelegate();
+			return session.createCriteria(Usuario.class).addOrder(Order.asc("nome")).list();
+		}
+
+		@Override
+		public List<Usuario> getAllBy(Usuario t) {
+			Session session = (Session) getEntityManager().getDelegate();
+			Example example = Example.create(t).enableLike().ignoreCase();		
+			return session.createCriteria(Usuario.class).add(example).addOrder(Order.asc("nome")).list();
+		}
+
+	}
+	
+	public class FornecedorDAO extends DaoAbstract<Fornecedor> {
+	
+		private static FornecedorDAO instance;
+
+		public static synchronized FornecedorDAO getInstance () {
+			if(instance == null)
+				instance = new FornecedorDAO();
+			return instance;
+		}
+
+		@Override
+		protected EntityManager getEntityManager() {
+			EntityManagerFactory factory = Persistence.createEntityManagerFactory("PetPU");
+			if (entityManager == null) {
+				entityManager = factory.createEntityManager();
+				setClazz(Fornecedor.class);
+			}
+			return entityManager;
+		}
+
+		@Override
+		public List<Fornecedor> getAll() {
+			Session session = (Session) getEntityManager().getDelegate();
+			return session.createCriteria(Fornecedor.class).addOrder(Order.asc("razaoSocial")).list();
+		}
+
+		@Override
+		public List<Fornecedor> getAllBy(Fornecedor t) {
+			Session session = (Session) getEntityManager().getDelegate();
+			Example example = Example.create(t).enableLike().ignoreCase();		
+			return session.createCriteria(Fornecedor.class).add(example).addOrder(Order.asc("razaoSocial")).list();
+		}
+
+	}
+	
+	public class EstadoDAO extends DaoAbstract<Estado> {
+	
+		private static EstadoDAO instance;
+
+		public static synchronized EstadoDAO getInstance () {
+			if(instance == null)
+				instance = new EstadoDAO();
+			return instance;
+		}
+
+		@Override
+		protected EntityManager getEntityManager() {
+			EntityManagerFactory factory = Persistence.createEntityManagerFactory("PetPU");
+			if (entityManager == null) {
+				entityManager = factory.createEntityManager();
+				setClazz(Estado.class);
+
+
+				getInstance().save(new Estado("Bahia", "BA", "BR"));
+				getInstance().save(new Estado("Sergipe", "SE", "BR"));
+				getInstance().save(new Estado("Pernambuco", "PE", "BR"));
+				getInstance().save(new Estado("Alagoas", "AL", "BR"));
+				getInstance().save(new Estado("Paraíba", "PB", "BR"));
+				getInstance().save(new Estado("Rio Grande do Norte", "RN", "BR"));
+				getInstance().save(new Estado("Ceará", "CE", "BR"));
+				getInstance().save(new Estado("Maranhão", "MA", "BR"));
+				getInstance().save(new Estado("Piauí", "PI", "BR"));
+			}
+			return entityManager;
+		}
+
+		@Override
+		public List<Estado> getAll() {
+			Session session = (Session) getEntityManager().getDelegate();
+			return session.createCriteria(Estado.class).addOrder(Order.asc("nome")).list();
+		}
+
+		@Override
+		public List<Estado> getAllBy(Estado t) {
+			Session session = (Session) getEntityManager().getDelegate();
+			Example example = Example.create(t).enableLike().ignoreCase();		
+			return session.createCriteria(Estado.class).add(example).addOrder(Order.asc("nome")).list();
+		}
+
+	}
+	
 ## Criar as classes DAO Genérico referentes à manipulação e consulta dos dados de cada entidade envolvida
 Classe DAO genérica e abstrata DaoAbstract<T> utilizado Generics.
 	
@@ -129,44 +252,7 @@ Classe DAO genérica e abstrata DaoAbstract<T> utilizado Generics.
 
 	}
 	
-Foram criadas classes DAO para cada entidade envolvida. Exemplo a classe UsuarioDAO.java extendendo a classe abstrata DaoAbstract.java utilizando Generics e padrão de projeto Singleton:
-
-	public class UsuarioDAO extends DaoAbstract<Usuario> {
-
-		private static UsuarioDAO instance;
-
-		private UsuarioDAO() {}
-
-		public static synchronized UsuarioDAO getInstance () {
-			if(instance == null)
-				instance = new UsuarioDAO();
-			return instance;
-		}
-
-		@Override
-		protected EntityManager getEntityManager() {
-			EntityManagerFactory factory = Persistence.createEntityManagerFactory("PetPU");
-			if (entityManager == null) {
-				entityManager = factory.createEntityManager();
-				setClazz(Usuario.class);
-			}
-			return entityManager;
-		}
-
-		@Override
-		public List<Usuario> getAll() {
-			Session session = (Session) getEntityManager().getDelegate();
-			return session.createCriteria(Usuario.class).addOrder(Order.asc("nome")).list();
-		}
-
-		@Override
-		public List<Usuario> getAllBy(Usuario t) {
-			Session session = (Session) getEntityManager().getDelegate();
-			Example example = Example.create(t).enableLike().ignoreCase();		
-			return session.createCriteria(Usuario.class).add(example).addOrder(Order.asc("nome")).list();
-		}
-
-	}
+F
 
 ## É facultado o uso de JPA/Hibernate
 No projeto foi utilizando o JPA e Hibernate. Trecho da classe Fornecedor.java utilizando annotations do JPA.
@@ -349,6 +435,56 @@ Servlet LoginController.java
 		protected void doPost(HttpServletRequest request, HttpServletResponse response)
 				throws ServletException, IOException {
 			processRequest(request, response);
+		}
+
+	}
+	
+Classe para ação de Logn Login.java implementando Commad:
+
+	public class Login implements Command{
+
+		@Override
+		public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
+			dispatcher.forward(request, response);		
+		}
+
+	}
+	
+Classe para ação de Salvar Fornecedor FornecedorSave.java implementando Command.
+
+	public class FornecedorSave implements Command{
+
+		@Override
+		public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+			Fornecedor fornecedor = new Fornecedor();
+			fornecedor.setRazaoSocial(request.getParameter("razaoSocial"));
+			fornecedor.setNomeFantasia(request.getParameter("nomeFantasia"));
+			fornecedor.setCnpj(request.getParameter("cnpj"));
+			fornecedor.setInscricaoEstadual(request.getParameter("inscricaoEstadual"));
+			fornecedor.setInscricaoMunicipal(request.getParameter("inscricaoMunicipal"));
+			fornecedor.setTelefone(request.getParameter("telefone"));
+			fornecedor.setEmail(request.getParameter("email"));
+			fornecedor.setEndereco(request.getParameter("endereco"));
+			fornecedor.setComplementoEndereco(request.getParameter("complementoEndereco"));
+			fornecedor.setNumeroEndereco(request.getParameter("numeroEndereco"));
+			fornecedor.setCidade(request.getParameter("cidade"));
+			fornecedor.setEstado(EstadoDAO.getInstance().getById(Long.parseLong(request.getParameter("estado"))));
+			try {
+				fornecedor.valida();
+				FornecedorDAO.getInstance().save(fornecedor);
+				request.setAttribute("mensagem", "Fornecedor salvo com sucesso!!!");
+				request.setAttribute("tipo", "success");
+				request.setAttribute("fornecedores", FornecedorDAO.getInstance().getAll());
+				RequestDispatcher dispatcher = request.getRequestDispatcher("./controller?command=FornecedorIndex");
+				dispatcher.forward(request, response);
+			} catch (Exception e) {
+				request.setAttribute("fornecedor", fornecedor);
+				request.setAttribute("mensagem", "Falha ao salvar Fornecedor! " + e.getMessage());
+				request.setAttribute("tipo", "danger");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("./controller?command=FornecedorCreate");
+				dispatcher.forward(request, response);
+			}
 		}
 
 	}
